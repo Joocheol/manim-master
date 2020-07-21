@@ -1,6 +1,7 @@
 from manimlib.imports import *
 
-class a2020072012(Scene):
+
+class CircleExample(Scene):
     def construct(self):
-        c = Circle(radius=0.5)
+        c = Circle()
         self.play(ShowCreation(c))
