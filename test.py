@@ -2,6 +2,7 @@
 
 from manimlib.imports import *
 
+
 # To watch one of these scenes, run the following:
 # python -m manim example_scenes.py SquareToCircle -pl
 #
@@ -15,7 +16,7 @@ from manimlib.imports import *
 # for a 1920x1080 video)
 
 
-#----- Surfaces
+# ----- Surfaces
 class SurfacesAnimation(ThreeDScene):
     def construct(self):
         axes = ThreeDAxes()
@@ -25,14 +26,14 @@ class SurfacesAnimation(ThreeDScene):
                 np.sin(TAU * v),
                 2 * (1 - u)
             ]),
-            resolution=(6, 32)).fade(0.5) #Resolution of the surfaces
+            resolution=(6, 32)).fade(0.5)  # Resolution of the surfaces
 
         paraboloid = ParametricSurface(
             lambda u, v: np.array([
-                np.cos(v)*u,
-                np.sin(v)*u,
-                u**2
-            ]),v_max=TAU,
+                np.cos(v) * u,
+                np.sin(v) * u,
+                u ** 2
+            ]), v_max=TAU,
             checkerboard_colors=[PURPLE_D, PURPLE_E],
             resolution=(10, 32)).scale(2)
 
@@ -40,45 +41,44 @@ class SurfacesAnimation(ThreeDScene):
             lambda u, v: np.array([
                 u,
                 v,
-                #u**2-v**2
-                u**2+v**2
-            ]),v_min=-2,v_max=2,u_min=-2,u_max=2,checkerboard_colors=[BLUE_D, BLUE_E],
+                # u**2-v**2
+                u ** 2 + v ** 2
+            ]), v_min=-2, v_max=2, u_min=-2, u_max=2, checkerboard_colors=[BLUE_D, BLUE_E],
             resolution=(15, 32)).scale(1)
 
         cone = ParametricSurface(
             lambda u, v: np.array([
-                u*np.cos(v),
-                u*np.sin(v),
+                u * np.cos(v),
+                u * np.sin(v),
                 u
-            ]),v_min=0,v_max=TAU,u_min=-2,u_max=2,checkerboard_colors=[GREEN_D, GREEN_E],
+            ]), v_min=0, v_max=TAU, u_min=-2, u_max=2, checkerboard_colors=[GREEN_D, GREEN_E],
             resolution=(15, 32)).scale(1)
 
         hip_one_side = ParametricSurface(
             lambda u, v: np.array([
-                np.cosh(u)*np.cos(v),
-                np.cosh(u)*np.sin(v),
+                np.cosh(u) * np.cos(v),
+                np.cosh(u) * np.sin(v),
                 np.sinh(u)
-            ]),v_min=0,v_max=TAU,u_min=-2,u_max=2,checkerboard_colors=[YELLOW_D, YELLOW_E],
+            ]), v_min=0, v_max=TAU, u_min=-2, u_max=2, checkerboard_colors=[YELLOW_D, YELLOW_E],
             resolution=(15, 32))
 
-        ellipsoid=ParametricSurface(
+        ellipsoid = ParametricSurface(
             lambda u, v: np.array([
-                1*np.cos(u)*np.cos(v),
-                2*np.cos(u)*np.sin(v),
-                0.5*np.sin(u)
-            ]),v_min=0,v_max=TAU,u_min=-PI/2,u_max=PI/2,checkerboard_colors=[TEAL_D, TEAL_E],
+                1 * np.cos(u) * np.cos(v),
+                2 * np.cos(u) * np.sin(v),
+                0.5 * np.sin(u)
+            ]), v_min=0, v_max=TAU, u_min=-PI / 2, u_max=PI / 2, checkerboard_colors=[TEAL_D, TEAL_E],
             resolution=(15, 32)).scale(2)
 
         sphere = ParametricSurface(
             lambda u, v: np.array([
-                1.5*np.cos(u)*np.cos(v),
-                1.5*np.cos(u)*np.sin(v),
-                1.5*np.sin(u)
-            ]),v_min=0,v_max=TAU,u_min=-PI/2,u_max=PI/2,checkerboard_colors=[RED_D, RED_E],
+                1.5 * np.cos(u) * np.cos(v),
+                1.5 * np.cos(u) * np.sin(v),
+                1.5 * np.sin(u)
+            ]), v_min=0, v_max=TAU, u_min=-PI / 2, u_max=PI / 2, checkerboard_colors=[RED_D, RED_E],
             resolution=(15, 32)).scale(2)
 
-
-        self.set_camera_orientation(phi=70 * DEGREES)
+        self.set_camera_orientation(phi=75 * DEGREES)
         self.begin_ambient_camera_rotation(rate=0.2)
 
         self.add(axes)
