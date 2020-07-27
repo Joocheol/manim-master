@@ -3,6 +3,31 @@ from manimlib.imports import *
 EXAMPLE_TRANFORM = [[0, 1], [-1, 1]]
 TRANFORMED_VECTOR = [[2], [3]]
 
+def plane_wave_homotopy(x, y, z, t):
+    norm = get_norm([x, y])
+    tau = interpolate(5, -5, t) + norm/FRAME_X_RADIUS
+    alpha = sigmoid(tau)
+    return [x + 0.5*np.sin(2*np.pi*alpha)-t*SMALL_BUFF/2, y + 0.5*np.sin(2*np.pi*alpha)-t*SMALL_BUFF/2, z]
+
+class MyAnimation(VectorScene):
+    def construct(self):
+        # plane = self.add_plane()
+        # self.add_axes(color=RED)
+        self.wait()
+        # a = self.get_basis_vectors()
+        # self.play(Write(a))
+        # b = self.get_vector_label(Vector([-1, 3]), 'a')
+        # self.add(b)
+        a = Vector([1, 2])
+        b = Matrix([1, 2])
+        b.next_to(a, RIGHT+UP)
+        self.play(
+            ShowCreation(a),
+            ShowCreation(b)
+        )
+
+
+
 class ExampleTransformation(LinearTransformationScene):
     def construct(self):
         self.setup()
