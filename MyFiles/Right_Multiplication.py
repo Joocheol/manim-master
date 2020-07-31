@@ -18,8 +18,8 @@ class a2020080105(Scene):
         self.wait()
 
         c = Circle()
-        mm_1 = MobjectMatrix(c)
-        self.play(ShowCreation(mm_1))
+        # mm_1 = MobjectMatrix(c)
+        # self.play(ShowCreation(mm_1))
 
 class Right_Multiplication(Scene):
     def construct(self):
