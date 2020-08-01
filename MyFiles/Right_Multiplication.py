@@ -1,5 +1,58 @@
 from manimlib.imports import *
 
+
+class a2020080115(Scene):
+    def construct(self):
+        mm = self.row_matrix(5, 3)
+        rm = self.col_matrix(1, 5)
+        c = self.columns(3)
+        r = self.rows(3)
+        g = VGroup(mm, c, r, rm).arrange()
+        self.play(ShowCreation(g))
+        self.wait()
+
+
+    def rows(self, m):
+        rec = Rectangle(height=0.25, width=1.25).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
+        g = VGroup(*[rec.copy() for i in range(m)]).arrange((DOWN))
+        gg = self.add_brackets(g)
+        return gg
+
+    def columns(self, m):
+        rec= Rectangle(height=2.3, width=0.25).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
+        g= VGroup(*[rec.copy() for i in range(m)]).arrange((RIGHT))
+        gg = self.add_brackets(g)
+        return gg
+
+    def col_matrix(self, m, n):
+        rec = Rectangle(height=0.25, width=0.25).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
+        g = VGroup(*[rec.copy() for i in range(n)]).arrange(DOWN)
+        gg = VGroup(*[g.copy() for i in range(m)]).arrange(RIGHT)
+        ggg = self.add_brackets(gg)
+        return ggg
+
+
+    def row_matrix(self, m, n):
+        rec = Rectangle(height=0.25, width=0.25).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
+        g = VGroup(*[rec.copy() for i in range(m)]).arrange(RIGHT)
+        gg = VGroup(*[g.copy() for i in range(n)]).arrange(DOWN)
+        ggg = self.add_brackets(gg)
+        return ggg
+
+    def add_brackets(self, mobj):
+        bracket_pair = TexMobject("\\big[", "\\big]")
+        bracket_pair.scale(2)
+        bracket_pair.stretch_to_fit_height(
+            mobj.get_height() + 2 * 0.1
+        )
+        l_bracket, r_bracket = bracket_pair.split()
+        l_bracket.next_to(mobj, LEFT, .2)
+        r_bracket.next_to(mobj, RIGHT, .2)
+        #self.add(l_bracket, mobj, r_bracket)
+        #self.brackets = VGroup(l_bracket, mobj, r_bracket)
+        return VGroup(l_bracket, mobj, r_bracket)
+
+
 class a2020080111(Scene):
     def construct(self):
 
