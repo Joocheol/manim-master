@@ -3,19 +3,46 @@ from manimlib.imports import *
 class a2020080111(Scene):
     def construct(self):
 
-        rec = Rectangle(height=0.1, width=0.1).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
-        g = VGroup(*[rec.copy() for i in range(6)]).arrange(RIGHT)
-        gg = VGroup(*[g.copy() for i in range(10)]).arrange(DOWN)
+        rec = Rectangle(height=0.25, width=0.25).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
+        g = VGroup(*[rec.copy() for i in range(3)]).arrange(RIGHT)
+        gg = VGroup(*[g.copy() for i in range(5)]).arrange(DOWN)
 
         self.add(gg)
         self.add_brackets(gg)
         self.wait()
+        gg.save_state()
 
-        rec_2 = Rectangle(height=0.4, width=2.5).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
-        self.play(TransformFromCopy(gg, rec_2))
+        rec_2 = Rectangle(height=0.25, width=1.25).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
+        g_2 = VGroup(*[rec_2.copy() for i in range(5)]).arrange((DOWN))
+        self.play(ReplacementTransform(gg, g_2))
+        self.wait()
 
-        rec_3 = Rectangle(height=2.5, width=0.4).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
-        self.play(TransformFromCopy(rec_2, rec_3))
+        gg.restore()
+        self.play(ReplacementTransform(g_2, gg))
+        self.wait()
+
+        rec_0 = Rectangle(height=0.25, width=0.25).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
+        g_0 = VGroup(*[rec_0.copy() for i in range(5)]).arrange(DOWN)
+        gg_0 = VGroup(*[g_0.copy() for i in range(3)]).arrange(RIGHT)
+
+        # self.add(gg_0)
+        # self.add_brackets(gg_0)
+        # self.wait()
+        # gg.save_state()
+        # self.play(ReplacementTransform(g_2, gg_0))
+        # self.wait()
+
+        self.play(ReplacementTransform(gg, gg_0))
+
+        rec_3 = Rectangle(height=2.3, width=0.25).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
+        g_3 = VGroup(*[rec_3.copy() for i in range(3)]).arrange((RIGHT))
+        self.play(ReplacementTransform(gg, g_3))
+        self.wait()
+
+        gg.restore()
+        self.play(ReplacementTransform(g_3, gg))
+
+        self.play(ShowCreation(gg[0][0]))
 
     def add_brackets(self, mobj):
         bracket_pair = TexMobject("\\big[", "\\big]")
