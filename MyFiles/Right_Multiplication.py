@@ -11,6 +11,8 @@ class a2020080115(Scene):
         self.play(ShowCreation(g))
         self.wait()
 
+        self.play(g[0][1][1].to_edge, LEFT)
+
 
     def rows(self, m):
         rec = Rectangle(height=0.25, width=1.25).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
@@ -30,7 +32,6 @@ class a2020080115(Scene):
         gg = VGroup(*[g.copy() for i in range(m)]).arrange(RIGHT)
         ggg = self.add_brackets(gg)
         return ggg
-
 
     def row_matrix(self, m, n):
         rec = Rectangle(height=0.25, width=0.25).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
