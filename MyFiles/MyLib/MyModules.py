@@ -1,5 +1,13 @@
 from manimlib.imports import *
 
+# computer code printing.
+# This is really sensitive to word "verbatim"
+def code(self, text):
+
+    run_time = len(text) / 30
+    tmp = TextMobject("\\begin{verbatim} " + text + "\\end{verbatim}").set_color(GRAY)
+    self.play(ShowCreation(tmp.scale(0.6).to_edge(UL, buff=1)), run_time=run_time)
+
 
 # mobject 좌우를 괄호로 감싸기
 def add_brackets(mobj):
