@@ -1,11 +1,16 @@
 from manimlib.imports import *
-import MyFiles.MyLib.MyModules as My
 
-class a2020080209(Scene):
+class a20200802(Scene):
     def construct(self):
-        rect = Rectangle(height=0.25, width=0.25).set_fill(YELLOW, opacity=0.8).set_stroke(width=0)
+        rect = Rectangle(height=0.5, width=0.5)
+        rect.set_fill(YELLOW, opacity=0.8)
+        rect.set_stroke(width=0)
 
-        a = My.add_brackets(rect)
+        group = VGroup(*[rect.copy() for i in range(5)])
+        group.arrange(RIGHT)
+        group_1 = VGroup(*[group.copy() for i in range(3)])
+        group_1.arrange(DOWN)
 
-        self.play(Write(a))
-        self.wait()
+        self.play(Write(group_1))
+        self.wait(2)
+
