@@ -8,7 +8,7 @@ class a2020080620(ThreeDScene):
         # self.play(ShowCreation(axes))
         # self.wait()
         c = Circle()
-        self.set_camera_orientation(phi=0, theta=PI)
+        self.set_camera_orientation(phi=120*DEGREES, theta=0)
         self.play(ShowCreation(axes), ShowCreation(c))
 
         self.begin_ambient_camera_rotation(rate=0.5)  # Start move camera
