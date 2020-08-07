@@ -7,9 +7,11 @@ class a2020080620(ThreeDScene):
         # self.set_camera_orientation()
         # self.play(ShowCreation(axes))
         # self.wait()
-        self.set_camera_orientation(phi=PI / 10, theta=PI/3)
-        self.play(ShowCreation(axes))
-        self.begin_ambient_camera_rotation(rate=1)  # Start move camera
-        # self.wait(5)
-        # self.stop_ambient_camera_rotation()
+        c = Circle()
+        self.set_camera_orientation(phi=0, theta=PI)
+        self.play(ShowCreation(axes), ShowCreation(c))
+
+        self.begin_ambient_camera_rotation(rate=0.5)  # Start move camera
+        self.wait(5)
+        self.stop_ambient_camera_rotation()
         self.wait()
