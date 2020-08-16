@@ -3,6 +3,35 @@ from manimlib.imports import *
 
 class intro(Scene):
     def construct(self):
+        nline = NumberLine(x_min=0, x_max=4.1, unit_size=2, number_at_center=2, include_numbers=True)
+        d = Dot()
+        c_arrow_01 = CurvedArrow(np.array([-4, -0.6, 0]), np.array([-2, -0.6, 0]))
+        c_arrow_02 = CurvedArrow(np.array([-2, -0.6, 0]), np.array([0, -0.6, 0]))
+        c_arrow_03 = CurvedArrow(np.array([0, -0.6, 0]), np.array([2, -0.6, 0]))
+        c_arrow_04 = CurvedArrow(np.array([2, -0.6, 0]), np.array([4, -0.6, 0]))
+
+        self.play(ShowCreation(d.move_to([-4, 0, 0])))
+
+        self.play(ShowCreation(nline))
+
+        self.play(ShowCreation(c_arrow_01))
+        self.play(ShowCreation(c_arrow_02))
+        self.play(ShowCreation(c_arrow_03))
+        self.play(ShowCreation(c_arrow_04))
+
+        self.wait()
+
+class intro_02(Scene):
+    def construct(self):
+        text_01 = TextMobject("1. Simple interest")
+        text_02 = TextMobject("2. Compound interest")
+        g_01 = VGroup(text_01, text_02).arrange(direction=DOWN, aligned_edge=LEFT)
+
+        self.play(Write(g_01))
+        self.wait()
+
+class intro_01(Scene):
+    def construct(self):
         formula_01 = TexMobject(*['100', r"\cdot", '(1+r)', '=', '110'])
         formula_02 = TexMobject(*['100', '=', r"{{110}", r"\over", r"{1 + r}}"])
         formula_03 = TexMobject(*['100', r"\cdot", '(1+r)', '=', '110'])
@@ -29,11 +58,6 @@ class intro(Scene):
             ReplacementTransform(formula_02[2], formula_03[4]),
         )
         self.wait()
-
-        # self.play(
-        #     Write(formula_02)
-        # )
-        # self.wait()
 
 class intro_00(Scene):
     def construct(self):
