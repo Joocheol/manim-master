@@ -2,6 +2,88 @@ from manimlib.imports import *
 
 
 class intro(Scene):
+    def construct(self):
+        formula_01 = TexMobject(*['100', r"\cdot", '(1+r)', '=', '110'])
+        formula_02 = TexMobject(*['100', '=', r"{{110}", r"\over", r"{1 + r}}"])
+        formula_03 = TexMobject(*['100', r"\cdot", '(1+r)', '=', '110'])
+
+        self.play(
+            Write(formula_01)
+        )
+        self.wait()
+
+        self.play(
+            ReplacementTransform(formula_01[0], formula_02[0]),
+            ReplacementTransform(formula_01[1], formula_02[3]),
+            ReplacementTransform(formula_01[2], formula_02[4]),
+            ReplacementTransform(formula_01[3], formula_02[1]),
+            ReplacementTransform(formula_01[4], formula_02[2]),
+        )
+        self.wait()
+
+        self.play(
+            ReplacementTransform(formula_02[0], formula_03[0]),
+            ReplacementTransform(formula_02[3], formula_03[1]),
+            ReplacementTransform(formula_02[4], formula_03[2]),
+            ReplacementTransform(formula_02[1], formula_03[3]),
+            ReplacementTransform(formula_02[2], formula_03[4]),
+        )
+        self.wait()
+
+        # self.play(
+        #     Write(formula_02)
+        # )
+        # self.wait()
+
+class intro_00(Scene):
+    def construct(self):
+        formula_01 = TexMobject(*[r"100", r"\neq", r"110"])
+        formula_02 = TexMobject(*[r"\$ 100", r"\neq", r"\$ 110"])
+        path_01 = ArcBetweenPoints(formula_02[0].get_center(), LEFT * 4)
+        path_02 = ArcBetweenPoints(formula_02[2].get_center(), RIGHT * 4)
+        line = Line(start=DOWN, end=UP)
+        text_01 = TextMobject(r"Present")
+        text_02 = TextMobject(r"Future")
+        c_arrow_01 = CurvedArrow(LEFT * 4 + 0.5 * DOWN, RIGHT * 4 + 0.5 * DOWN)
+        c_arrow_02 = CurvedArrow(RIGHT * 4 + 0.5 * UP, LEFT * 4 + 0.5 * UP)
+
+        self.play(
+            Write(formula_01[0]),
+            Write(formula_01[2]),
+        )
+        self.wait()
+
+        self.play(
+            Write(formula_01[1]),
+        )
+        self.wait()
+
+        self.play(
+            ReplacementTransform(formula_01[0], formula_02[0]),
+            ReplacementTransform(formula_01[2], formula_02[2]),
+        )
+        self.wait()
+
+        self.play(
+            ReplacementTransform(formula_01[1], line),
+            MoveAlongPath(formula_02[0], path_01),
+            MoveAlongPath(formula_02[2], path_02),
+            Write(text_01.move_to(LEFT * 4 + UP * 3)),
+            Write(text_02.move_to(RIGHT * 4 + UP * 3)),
+        )
+        self.wait()
+
+        self.play(
+            ShowCreation(c_arrow_01),
+        )
+        self.wait()
+
+        self.play(
+            ShowCreation(c_arrow_02),
+        )
+        self.wait()
+
+class intro_old(Scene):
     CONFIG = {
         "n_of_steps": 20,
         "width": 7,
@@ -52,7 +134,6 @@ class intro(Scene):
         self.wait()
         self.play(ShowCreationThenFadeOut(nodes_g))
         self.wait()
-
 
 class steps(Scene):
     CONFIG = {
