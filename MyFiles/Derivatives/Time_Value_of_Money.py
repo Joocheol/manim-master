@@ -1,6 +1,6 @@
 from manimlib.imports import *
 
-class Title(Scene):
+class Time_value_of_money(Scene):
     def construct(self):
         text_01 = TextMobject(*["Time ", "Value ", "of ", "Money"]).scale(2)
         self.play(Write(text_01))
@@ -35,7 +35,7 @@ class intro_02(Scene):
         self.play(Write(g_01))
         self.wait()
 
-class intro_01(Scene):
+class Interest_simple(Scene):
     def construct(self):
         formula_01 = TexMobject(*['10', r"\cdot", '(1+r)', '=', '11'])
         formula_02 = TexMobject(*['10', '=', r"{{11}", r"\over", r"{1 + r}}"])
@@ -61,6 +61,68 @@ class intro_01(Scene):
             ReplacementTransform(formula_02[4], formula_03[2]),
             ReplacementTransform(formula_02[1], formula_03[3]),
             ReplacementTransform(formula_02[2], formula_03[4]),
+        )
+        self.wait()
+
+class Apple(Scene):
+    def construct(self):
+        apple_01 = TexMobject(*[r"\textrm{Apple }", r"(", "S_0", ")"]).move_to(LEFT * 4 + UP * 0)
+        apple_02 = TexMobject(*[r"\textrm{Apple }", r"(", "S_T", ")"]).move_to(RIGHT * 4 + UP * 0)
+
+        line = DashedLine(start=TOP, end=BOTTOM)
+        text_01 = TextMobject(r"Present").move_to(LEFT * 4 + UP * 3)
+        text_02 = TextMobject(r"Future").move_to(RIGHT * 4 + UP * 3)
+
+        c_arrow_01 = CurvedArrow(LEFT * 4 + 0.5 * DOWN, RIGHT * 4 + 0.5 * DOWN)
+        c_arrow_02 = CurvedArrow(RIGHT * 4 + 0.5 * UP, LEFT * 4 + 0.5 * UP)
+
+        self.add(*[line, text_01, text_02])
+        self.wait()
+
+        self.play(
+            Write(apple_01),
+            Write(apple_02),
+        )
+        self.wait()
+
+        self.play(
+            ShowCreation(c_arrow_01),
+            ShowCreation(c_arrow_02),
+        )
+        self.wait()
+
+        self.play(
+            Uncreate(c_arrow_01),
+            Uncreate(c_arrow_02),
+            run_time=2
+        )
+        self.wait()
+
+        graph = FunctionGraph(
+            lambda x: np.exp(-0.5/0.1 * (x - 4) ** 2) - 2,
+            x_min=3,
+            x_max=5,
+            color=YELLOW,
+            stroke_width=3,
+        )
+        self.play(ShowCreation(graph))
+
+        scale_factor = 3
+        self.play(
+            ScaleInPlace(apple_01[2], scale_factor)
+        )
+        self.wait(0.2)
+        self.play(
+            ScaleInPlace(apple_01[2], 1/scale_factor)
+        )
+        self.wait()
+
+        self.play(
+            ScaleInPlace(apple_02[2], scale_factor)
+        )
+        self.wait(0.2)
+        self.play(
+            ScaleInPlace(apple_02[2], 1/scale_factor)
         )
         self.wait()
 
