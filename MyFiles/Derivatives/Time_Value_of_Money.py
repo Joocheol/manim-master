@@ -1,7 +1,12 @@
 from manimlib.imports import *
 
+class Title(Scene):
+    def construct(self):
+        text_01 = TextMobject(*["Time ", "Value ", "of ", "Money"]).scale(2)
+        self.play(Write(text_01))
+        self.wait()
 
-class intro(Scene):
+class intro_03(Scene):
     def construct(self):
         nline = NumberLine(x_min=0, x_max=4.1, unit_size=2, number_at_center=2, include_numbers=True)
         d = Dot()
@@ -32,9 +37,9 @@ class intro_02(Scene):
 
 class intro_01(Scene):
     def construct(self):
-        formula_01 = TexMobject(*['100', r"\cdot", '(1+r)', '=', '110'])
-        formula_02 = TexMobject(*['100', '=', r"{{110}", r"\over", r"{1 + r}}"])
-        formula_03 = TexMobject(*['100', r"\cdot", '(1+r)', '=', '110'])
+        formula_01 = TexMobject(*['10', r"\cdot", '(1+r)', '=', '11'])
+        formula_02 = TexMobject(*['10', '=', r"{{11}", r"\over", r"{1 + r}}"])
+        formula_03 = TexMobject(*['10', r"\cdot", '(1+r)', '=', '11'])
 
         self.play(
             Write(formula_01)
@@ -59,13 +64,13 @@ class intro_01(Scene):
         )
         self.wait()
 
-class intro_00(Scene):
+class Money(Scene):
     def construct(self):
-        formula_01 = TexMobject(*[r"100", r"\neq", r"110"])
-        formula_02 = TexMobject(*[r"\$ 100", r"\neq", r"\$ 110"])
+        formula_01 = TexMobject(*[r"10", r"\neq", r"11"])
+        formula_02 = TexMobject(*[r"\$ 10", r"\neq", r"\$ 11"])
         path_01 = ArcBetweenPoints(formula_02[0].get_center(), LEFT * 4)
         path_02 = ArcBetweenPoints(formula_02[2].get_center(), RIGHT * 4)
-        line = Line(start=DOWN, end=UP)
+        line = DashedLine(start=TOP, end=BOTTOM)
         text_01 = TextMobject(r"Present")
         text_02 = TextMobject(r"Future")
         c_arrow_01 = CurvedArrow(LEFT * 4 + 0.5 * DOWN, RIGHT * 4 + 0.5 * DOWN)
@@ -73,6 +78,10 @@ class intro_00(Scene):
 
         self.play(
             Write(formula_01[0]),
+        )
+        self.wait()
+
+        self.play(
             Write(formula_01[2]),
         )
         self.wait()
@@ -89,7 +98,8 @@ class intro_00(Scene):
         self.wait()
 
         self.play(
-            ReplacementTransform(formula_01[1], line),
+            FadeOut(formula_01[1]),
+            ShowCreation(line),
             MoveAlongPath(formula_02[0], path_01),
             MoveAlongPath(formula_02[2], path_02),
             Write(text_01.move_to(LEFT * 4 + UP * 3)),
