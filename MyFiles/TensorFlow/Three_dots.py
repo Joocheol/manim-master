@@ -1,14 +1,15 @@
 from manimlib.imports import *
 
 
-class Plotting_a_line(GraphScene):
+class Three_Dots(GraphScene):
     def construct(self):
         self.setup_axes()
         self.wait()
 
         dot_01 = Dot().move_to(self.coords_to_point(2, 3))
-        dot_02 = Dot().move_to(self.coords_to_point(5, 7))
-        self.add(*[dot_01, dot_02])
+        dot_02 = Dot().move_to(self.coords_to_point(5, 9))
+        dot_03 = Dot().move_to(self.coords_to_point(7, 8))
+        self.add(*[dot_01, dot_02, dot_03])
         self.wait()
 
         tracker_01 = ValueTracker(-1)
